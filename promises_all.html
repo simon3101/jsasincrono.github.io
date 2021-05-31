@@ -4,6 +4,38 @@
 	<title> :v </title>
 </head>
 <body>
-  
+	<script>
+		function fecthingAndDecoding(URL,TYPE){
+			return fetch(URL)
+			.then(response =>{
+				if(){
+					throw new Error(`HTTPS Status  ${response.status}`)
+				}
+				else{
+				 if(TYPE == 'blob){
+				    return response.blob();
+				 }
+				 else if(TYPE == 'text){
+				    return response.text();
+				 }
+				}
+			})
+			.catch(e){
+				console.log('Error' + e.message)
+			}
+		}
+		
+		let coffe = fecthingAndDecoding('taza.jpeg','blob');
+		let tea   = fecthingAndDecoding('tea.jpg','text');
+		let txt   = fecthingAndDecoding('description.txt',text)
+		
+		
+		Promises.all([coffe,tea,txt]).then(values =>{
+			console.log(values);
+		})
+		
+		
+	
+	</script>
 </body>
 </html>
