@@ -15,18 +15,31 @@
 			el parametro del callback sera un objeto respuesta(response en ingles), que sera el resultado obtenido de la promesa, con esa respuesta podemos trabajar
 		
 		*/
+// 		Promesa numero 2
 		let promise2 = promise.then(respuesta=>{
-			
 			console.log(respuesta)
 			if(!respuesta.ok){
-				// la respuesta es falsa, arrojamos un error, indicando el estado de la respuesta
-				throw new Error(`HTTPS Status ${respuesta.status}`)
+				//si la respuesta es falsa, arrojamos un error, indicando el estado de la respuesta
+				throw new Error(`HTTPS Status ${respuesta.status}`);
 			}
 			else{
 				// Esa respuesta la transformamos en un objeto blob
-				return respuesta.blob()
+				return respuesta.blob();
 			}
 
+		})
+// 		Promesa Numero 3
+		// Aqui notamos que respuesta.blob() es igual a 'objBlob'
+		// el resultado retornado de respuesta.blob() es el resultado de promise2(eso en caso de ser exisota la peticion fetch)
+		let promise3 = promise2.then(objBlob =>{
+			let objectURL = URL.createObjectURL(objBlob);
+			let img = document.createElement('img');
+			img.src = objectURL
+			document.body.appendChild(img);
+		})
+// 		en caso de que promise3 de algun fallo, arrojara un mensaje de error, especificando el error.
+		let mensajeError = promise3.catch(e =>{
+			console.log(`Hubo un Problema al obtener el resultado de la promesa el error podria ser el siguiente ${e.message}`)
 		})
 	</script>
 </div>
