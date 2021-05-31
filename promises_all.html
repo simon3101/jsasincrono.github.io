@@ -5,37 +5,48 @@
 </head>
 <body>
 	<script>
-		function fecthingAndDecoding(URL,TYPE){
-			return fetch(URL)
-			.then(response =>{
-				if(!response.ok){
-					throw new Error(`HTTPS Status  ${response.status}`)
-				}
-				else{
-				 if(TYPE == 'blob'){
-				    return response.blob();
-				 }
-				 else if(TYPE == 'text'){
-				    return response.text();
-				 }
-				}
-			})
-			.catch(e){
-				console.log('Error' + e.message)
-			}
+		function fetchingAndDecoding(url, type) {
+		  return fetch(url).then(response => {
+		    if(!response.ok) {
+		      throw new Error(`HTTP error! status: ${response.status}`);
+		    } else {
+		      if(type === 'blob') {
+			return response.blob();
+		      } else if(type === 'text') {
+			return response.text();
+		      }
+		    }
+		  })
+		  .catch(e => {
+		    console.log(`There has been a problem with your fetch operation for resource "${url}": ` + e.message);
+		  });
 		}
 		
-		let coffe = fecthingAndDecoding('taza.jpeg','blob');
-		let tea   = fecthingAndDecoding('tea.jpg','text');
-		let txt   = fecthingAndDecoding('description.txt',text)
+		// tres variables que tendran como valor el resultado de una promesa 		
+		let coffe = fetchingAndDecoding('taza.jpeg','blob');	// blob
+		let tea   = fetchingAndDecoding('tea.jpg','text');	// blob
+		let txt   = fetchingAndDecoding('description.txt','text;)// text
 		
 		
 		Promises.all([coffe,tea,txt]).then(values =>{
 			console.log(values);
+			// Obtiene todo los blob y texts de el array retornado por promise.all 			
+			let objectURL_1 = URL.createObjectURL(values[0]);
+			let objectURL_2= URL.createObjectURL(values[1]);
+			let descText = URL.createObjectURL(values[2]);
+			// Display the images in <img> elements
+			let image1 = document.createElement('img');
+			let image2 = document.createElement('img');
+			image1.src = objectURL1;
+			image2.src = objectURL2;
+			document.body.appendChild(image1);
+			document.body.appendChild(image2);
+
+			// Display the text in a paragraph
+			let para = document.createElement('p');
+			para.textContent = descText;
+			document.body.appendChild(para);
 		})
-		
-		
-	
 	</script>
 </body>
 </html>
