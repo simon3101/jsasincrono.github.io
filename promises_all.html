@@ -25,7 +25,7 @@
 		// tres variables que tendran como valor el resultado de una promesa 		
 		let coffe = fetchingAndDecoding('taza.jpeg','blob');	// blob
 		let tea   = fetchingAndDecoding('tea.jpg','text');	// blob
-		let txt   = fetchingAndDecoding('description.txt','text;)// text
+		let txt   = fetchingAndDecoding('description.txt','text')// text
 		
 		
 		Promises.all([coffe,tea,txt]).then(values =>{
