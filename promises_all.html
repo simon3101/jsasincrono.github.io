@@ -12,10 +12,10 @@
 					throw new Error(`HTTPS Status  ${response.status}`)
 				}
 				else{
-				 if(TYPE == 'blob){
+				 if(TYPE == 'blob'){
 				    return response.blob();
 				 }
-				 else if(TYPE == 'text){
+				 else if(TYPE == 'text'){
 				    return response.text();
 				 }
 				}
