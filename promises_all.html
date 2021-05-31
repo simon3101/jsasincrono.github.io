@@ -36,13 +36,14 @@
 					let paragraph = document.createElement('p');
 					let text = value;
 					paragraph.appendChild(text)
-					document.body.appendChild(text);
+					// si no es un Objecto htmlDOM dara error
+					document.body.appendChild(paragraph);
 				}
 				else if(value.type === 'image/jpeg'){
 					let objectURL = URL.createObjectURL(value);
-					let img = document.createElement('img')
-					img.src = objectURL
-					document.body.appendChild(img)
+					let img = document.createElement('img');
+					img.src = objectURL;
+					document.body.appendChild(img);
 				}
 			})
 			// console.log(values);
