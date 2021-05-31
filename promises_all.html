@@ -34,7 +34,7 @@
 				console.log(typeof value)
 				if(typeof value === 'string'){
 					let paragraph = document.createElement('p');
-					let text = value.text();
+					let text = document.createTextNode(value);
 					paragraph.appendChild(text);
 					// si no es un Objecto htmlDOM dara error
 					document.body.appendChild(paragraph);
