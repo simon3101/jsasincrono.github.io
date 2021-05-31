@@ -28,7 +28,7 @@
 		let txt   = fetchingAndDecoding('description.txt','text')// text
 		
 		
-		Promises.all([coffe,tea,txt]).then(values =>{
+		Promise.all([coffe,tea,txt]).then(values =>{
 			console.log(values);
 			// Obtiene todo los blob y texts de el array retornado por promise.all 			
 			let objectURL_1 = URL.createObjectURL(values[0]);
