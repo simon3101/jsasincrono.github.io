@@ -29,23 +29,38 @@
 		
 		
 		Promise.all([coffe,tea,txt]).then(values =>{
-			console.log(values);
-			// Obtiene todo los blob y texts de el array retornado por promise.all 			
-			let objectURL1 = URL.createObjectURL(values[0]);
-			let objectURL2 = URL.createObjectURL(values[1]);
-			let descText    = values[2];
-			// Display the images in <img> elements
-			let image1 = document.createElement('img');
-			let image2 = document.createElement('img');
-			image1.src = objectURL1;
-			image2.src = objectURL2; 
-			document.body.appendChild(image1);
-			document.body.appendChild(image2);
+			values.map(value =>{
+				
+				if(typeof value === 'string'){
+					let paragraph = document.createElement('p');
+					let text = value;
+					paragraph.appendChild(text)
+					document.body.appendChild(text);
+				}
+				else if(value === 'img/jpeg'){
+					let objectURL = URL.createObjectURL(value);
+					let img = document.createElement('img')
+					img.src = objectURL
+					document.appendChild(img)
+				}
+			})
+			// console.log(values);
+			// // Obtiene todo los blob y texts de el array retornado por promise.all 			
+			// let objectURL1 = URL.createObjectURL(values[0]);
+			// let objectURL2 = URL.createObjectURL(values[1]);
+			// let descText    = values[2];
+			// // Display the images in <img> elements
+			// let image1 = document.createElement('img');
+			// let image2 = document.createElement('img');
+			// image1.src = objectURL1;
+			// image2.src = objectURL2; 
+			// document.body.appendChild(image1);
+			// document.body.appendChild(image2);
 
-			// Display the text in a paragraph
-			let para = document.createElement('p');
-			para.textContent = descText;
-			document.body.appendChild(para);
+			// // Display the text in a paragraph
+			// let para = document.createElement('p');
+			// para.textContent = descText;
+			// document.body.appendChild(para);
 		})
 	</script>
 </body>
