@@ -6,16 +6,16 @@
 <body>
 <div>
 	<script type="text/javascript">
-		console.log('funciona')
+		/* console.log('funciona')
 		// LLamamos la api Fetch para obtener una promesa
 
 		let promise = fetch('taza.jpeg');// pending...
-		// Then toma como parametro un callback
-		/* 
+		 Then toma como parametro un callback
+		 
 			el parametro del callback sera un objeto respuesta(response en ingles), que sera el resultado obtenido de la promesa, con esa respuesta podemos trabajar
 		
-		*/
-// 		Promesa numero 2
+		
+		Promesa numero 2
 		let promise2 = promise.then(respuesta=>{
 			console.log(respuesta)
 			if(!respuesta.ok){
@@ -28,17 +28,36 @@
 			}
 
 		})
-// 		Promesa Numero 3
-		// Aqui notamos que respuesta.blob() es igual a 'objBlob'
-		// el resultado retornado de respuesta.blob() es el resultado de promise2(eso en caso de ser exisota la peticion fetch)
+	 		Promesa Numero 3
+		 Aqui notamos que respuesta.blob() es igual a 'objBlob'
+		 el resultado retornado de respuesta.blob() es el resultado de promise2(eso en caso de ser exisota la peticion fetch)
 		let promise3 = promise2.then(objBlob =>{
 			let objectURL = URL.createObjectURL(objBlob);
 			let img = document.createElement('img');
 			img.src = objectURL
 			document.body.appendChild(img);
 		})
-// 		en caso de que promise3 de algun fallo, arrojara un mensaje de error, especificando el error.
+	 		en caso de que promise3 de algun fallo, arrojara un mensaje de error, especificando el error.
 		let mensajeError = promise3.catch(e =>{
+			console.log(`Hubo un Problema al obtener el resultado de la promesa el error podria ser el siguiente ${e.message}`)
+		})
+		*/
+		// la misma funcion anterior, pero mas simplificado.
+		fecth('taza.jpeg')
+		.then(respuesta =>{
+			if(!respuesta.ok){
+			}
+			else{
+			 	return respuesta.blob()
+			}
+		})
+		.then(myBlob =>{
+			let objectURL = URL.createObjectURL(myBlob)
+			let img = document.createElement(img);
+			img.src = objectURL
+			document.body.appendChild(img)
+		})
+		.catch(e =>{
 			console.log(`Hubo un Problema al obtener el resultado de la promesa el error podria ser el siguiente ${e.message}`)
 		})
 	</script>
