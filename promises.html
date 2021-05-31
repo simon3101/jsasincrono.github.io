@@ -6,7 +6,33 @@
 <body>
 <div>
 	<script type="text/javascript">
-		console.log('Funciona')
+		console.log('funciona')
+		// LLamamos la api Fetch para obtener una promesa
+
+		let promise = fetch('coffee.jpg');// pending...
+		// Then toma como parametro un callback
+		/* 
+			el parametro del callback sera un objeto respuesta(response en ingles), que sera el resultado obtenido de la promesa, con esa respuesta podemos trabajar
+		
+		*/
+		let promise2 = promise.then(respuesta=>{
+			// Esa respuesta la transformamos en un objeto blob
+			console.log(respuesta)
+			if(!respuesta.ok){
+				trhow new Error(`HTTPS Status ${respuesta.status}`)
+			}
+			else{
+				return respuesta.blob()
+			}
+
+		})// como vemos 
+		.catch(e){
+			console.error(e)
+		}
+
+		let promise3 = promise2.then(respuesta=>{
+
+		})
 	</script>
 </div>
 </body>
