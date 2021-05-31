@@ -16,21 +16,16 @@
 		
 		*/
 		let promise2 = promise.then(respuesta=>{
-			// Esa respuesta la transformamos en un objeto blob
+			
 			console.log(respuesta)
 			if(!respuesta.ok){
+				// la respuesta es falsa, arrojamos un error, indicando el estado de la respuesta
 				trhow new Error(`HTTPS Status ${respuesta.status}`)
 			}
 			else{
+				// Esa respuesta la transformamos en un objeto blob
 				return respuesta.blob()
 			}
-
-		})// como vemos 
-		.catch(e){
-			console.error(e)
-		}
-
-		let promise3 = promise2.then(respuesta=>{
 
 		})
 	</script>
