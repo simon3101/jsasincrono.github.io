@@ -31,14 +31,14 @@
 		Promise.all([coffe,tea,txt]).then(values =>{
 			console.log(values);
 			// Obtiene todo los blob y texts de el array retornado por promise.all 			
-			let objectURL_1 = URL.createObjectURL(values[0]);
-			let objectURL_2= URL.createObjectURL(values[1]);
-			let descText = URL.createObjectURL(values[2]);
+			let objectURL1 = URL.createObjectURL(values[0]);
+			let objectURL2 = URL.createObjectURL(values[1]);
+			let descText    = URL.createObjectURL(values[2]);
 			// Display the images in <img> elements
 			let image1 = document.createElement('img');
 			let image2 = document.createElement('img');
 			image1.src = objectURL1;
-			image2.src = objectURL2;
+			image2.src = objectURL2; 
 			document.body.appendChild(image1);
 			document.body.appendChild(image2);
 
