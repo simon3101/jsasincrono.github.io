@@ -8,7 +8,7 @@
 		function fecthingAndDecoding(URL,TYPE){
 			return fetch(URL)
 			.then(response =>{
-				if(){
+				if(!response.ok){
 					throw new Error(`HTTPS Status  ${response.status}`)
 				}
 				else{
