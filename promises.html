@@ -20,7 +20,7 @@
 			console.log(respuesta)
 			if(!respuesta.ok){
 				// la respuesta es falsa, arrojamos un error, indicando el estado de la respuesta
-				trhow new Error(`HTTPS Status ${respuesta.status}`)
+				throw new Error(`HTTPS Status ${respuesta.status}`)
 			}
 			else{
 				// Esa respuesta la transformamos en un objeto blob
