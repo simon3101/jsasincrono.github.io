@@ -29,20 +29,20 @@
 		
 		
 		Promise.all([coffe,tea,txt]).then(values =>{
-			values.map(value =>{
-				
-				if(typeof value === 'string'){
-					let paragraph = document.createElement('p');
-					let text = value;
-					paragraph.appendChild(text)
-					document.body.appendChild(text);
-				}
-				else if(value === 'img/jpeg'){
-					let objectURL = URL.createObjectURL(value);
-					let img = document.createElement('img')
-					img.src = objectURL
-					document.appendChild(img)
-				}
+			values.forEach(value =>{
+				console.log(value);
+// 				if(typeof value === 'string'){
+// 					let paragraph = document.createElement('p');
+// 					let text = value;
+// 					paragraph.appendChild(text)
+// 					document.body.appendChild(text);
+// 				}
+// 				else if(value.type === 'img/jpeg'){
+// 					let objectURL = URL.createObjectURL(value);
+// 					let img = document.createElement('img')
+// 					img.src = objectURL
+// 					document.appendChild(img)
+// 				}
 			})
 			// console.log(values);
 			// // Obtiene todo los blob y texts de el array retornado por promise.all 			
