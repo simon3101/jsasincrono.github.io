@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> :v </title>
+</head>
+<body>
+<div>
+	<script type="text/javascript">
+		//Functiones Asincrona con callbacks
+		// Lista de coberturas
+		let toppings = ['sheese','anchoby','sauce','pepperoni','pineapple'] ;
+		// Lista de Coberturas para elegir en la orden
+		let order 	 = toppings ; 
+		// 
+		let pizza    = [`pizza of ${order[0]}`,`pizza of ${order[4]}`,`pizza of ${order[3]}`] ;
+
+		function chooseToppings(callBackSucces){
+			return callBackSucces
+		}
+		function placeOrder(toppings,cb) {
+			// body... 
+			console.log(toppings)
+			return cb
+		}
+
+		function collectOrder(order,cb) {
+			// body... 
+				console.log(order)
+				return cb
+		}
+
+		function eatPizza(pizza,cb){
+			// body... 	
+			console.log(pizza)
+			console.log('eating pizza')
+			return cb
+		}	
+		function failureCallback() {
+			// body... 
+			console.error('Hubo un error')
+		}
+
+		chooseToppings(function(toppings) {
+  			console.log(toppings)
+  			placeOrder(toppings, function(order) {
+    			collectOrder(order, function(pizza) {
+      				eatPizza(pizza);
+    			}, failureCallback);
+  			}, failureCallback);
+		}, failureCallback);
+
+
+	</script>
+</div>
+</body>
+</html>
