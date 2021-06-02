@@ -68,7 +68,13 @@
 			// para.textContent = descText;
 			// document.body.appendChild(para);
 		}).catch(e =>{
-			console.log('1: ' + typeof e.isPrototypeOf );
+			var toType = function(obj) {
+			// funcion que verifica el tipo de dato de un objeto
+			   return ({}).toString.call(obj).match(/\s([a-z|A-Z]+)/)[1].toLowerCase()
+			}
+			console.log('Type: 'toType(e))
+			console.log(e.prototype.toString.call(e) );
+
 			console.log('2: ' + typeof e );
 			console.log(e.message);
 		})
