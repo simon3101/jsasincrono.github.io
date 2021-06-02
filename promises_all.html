@@ -41,9 +41,8 @@
 		
 		
 		Promise.all([coffe,tea,txt]).then(values =>{
+			console.log('bucle ' + values[0].headers.get('Content-Type'));
 			values.forEach(value =>{
-				console.log('bucle ' + value.headers.get('Content-Type'));
-				console.log('headers ' + value.headers);
 				console.log(typeof value)
 				if(typeof value === 'string'){
 					let paragraph = document.createElement('p');
