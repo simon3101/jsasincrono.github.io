@@ -16,7 +16,7 @@
 		    let hd_content_type = response.headers.get('Content-Type');// tipo de contenido - Content-Type
 		    
 		    // tipo de dato de la respuesta
-		    console.log('Type Response: ' + toType(response))
+		    console.log('Type Response: ' + hd_content_type);
 		    if(!response.ok) {
 		      throw new Error(`HTTP error! status: ${response.status}`);
 		    } else {
@@ -35,14 +35,15 @@
 		}
 		
 		// tres variables que tendran como valor el resultado de una promesa 		
-		let coffe = fetchingAndDecoding('taza1.jpeg','blob');	// blob
+		let coffe = fetchingAndDecoding('taza.jpeg','blob');	// blob
 		let tea   = fetchingAndDecoding('tea.jpg','blob');	// blob
 		let txt   = fetchingAndDecoding('description.txt','text')// text
 		
 		
 		Promise.all([coffe,tea,txt]).then(values =>{
 			values.forEach(value =>{
-				console.log(value.headers);
+				console.log('bucle ' + value.headers.get('Content-Type'));
+				console.log('headers ' + value.headers);
 				console.log(typeof value)
 				if(typeof value === 'string'){
 					let paragraph = document.createElement('p');
@@ -76,10 +77,8 @@
 			// para.textContent = descText;
 			// document.body.appendChild(para);
 		}).catch(e =>{
-			
 			// el tipo de dato devuelto por un catch es de tipo Error
-			console.log('Type: ' + toType(e))
-			console.log(e.message);
+			console.log('Type: ' + toType(e) + ' and the error is ' + e.message);
 		})
 	</script>
 </body>
