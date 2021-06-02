@@ -41,7 +41,7 @@
 		
 		
 		Promise.all([coffe,tea,txt]).then(values =>{
-			console.log('bucle ' + values);
+			console.log(values.headers);
 			values.forEach(value =>{
 				console.log(`Valor Individuar ${value}`)
 				if(typeof value === 'string'){
