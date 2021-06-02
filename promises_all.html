@@ -13,7 +13,7 @@
 		function fetchingAndDecoding(url, type) {
 		  return fetch(url).then(response => {
 	 	    // accedemos al resultado de la peticion HTTP,en este caso a sus cabezeras de respuesta		  
-		    let hd_content_type = response.headers.get('Content-Type'));// tipo de contenido - Content-Type
+		    let hd_content_type = response.headers.get('Content-Type');// tipo de contenido - Content-Type
 		    
 		    // tipo de dato de la respuesta
 		    console.log('Type Response: ' + toType(response))
