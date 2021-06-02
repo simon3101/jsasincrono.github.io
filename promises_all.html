@@ -7,7 +7,7 @@
 	<script>
 		function fetchingAndDecoding(url, type) {
 		  return fetch(url).then(response => {
-			console.log(response)
+		    console.log(response.headers.get('Content-Type'));
 		    if(!response.ok) {
 		      throw new Error(`HTTP error! status: ${response.status}`);
 		    } else {
@@ -27,7 +27,7 @@
 		}
 		
 		// tres variables que tendran como valor el resultado de una promesa 		
-		let coffe = fetchingAndDecoding('taza.jpeg','blob');	// blob
+		let coffe = fetchingAndDecoding('taza1.jpeg','blob');	// blob
 		let tea   = fetchingAndDecoding('tea.jpg','blob');	// blob
 		let txt   = fetchingAndDecoding('description.txt','text')// text
 		
