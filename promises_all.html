@@ -5,9 +5,18 @@
 </head>
 <body>
 	<script>
+		let toType = function(obj) {
+			// funcion que verifica el tipo de dato de un objeto en concreto
+			   return ({}).toString.call(obj).match(/\s([a-z|A-Z]+)/)[1].toLowerCase()
+		}
+		
 		function fetchingAndDecoding(url, type) {
 		  return fetch(url).then(response => {
-		    console.log(response.headers.get('Content-Type'));
+	 	    // accedemos al resultado de la peticion HTTP,en este caso a sus cabezeras de respuesta		  
+		    let hd_content_type = response.headers.get('Content-Type'));// tipo de contenido - Content-Type
+		    
+		    // tipo de dato de la respuesta
+		    console.log('Type Response: ' + toType(response))
 		    if(!response.ok) {
 		      throw new Error(`HTTP error! status: ${response.status}`);
 		    } else {
@@ -19,7 +28,6 @@
 		    }
 		  })
 		  .catch(e => {
-		    console.log(typeof e);
 		    console.log(`There has been a problem with your fetch operation for resource "${url}": ` + e.message);
 		  }).finally(()=>{
 		  	console.log(`fetch attempt for "${url}" finished`)
@@ -34,7 +42,7 @@
 		
 		Promise.all([coffe,tea,txt]).then(values =>{
 			values.forEach(value =>{
-				console.log(value);
+				console.log(value.headers);
 				console.log(typeof value)
 				if(typeof value === 'string'){
 					let paragraph = document.createElement('p');
@@ -68,10 +76,8 @@
 			// para.textContent = descText;
 			// document.body.appendChild(para);
 		}).catch(e =>{
-			var toType = function(obj) {
-			// funcion que verifica el tipo de dato de un objeto
-			   return ({}).toString.call(obj).match(/\s([a-z|A-Z]+)/)[1].toLowerCase()
-			}
+			
+			// el tipo de dato devuelto por un catch es de tipo Error
 			console.log('Type: ' + toType(e))
 			console.log(e.prototype.toString.call(e) );
 
