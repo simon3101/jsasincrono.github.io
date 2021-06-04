@@ -10,7 +10,7 @@
 			   return ({}).toString.call(obj).match(/\s([a-z|A-Z]+)/)[1].toLowerCase()
 		}
 		
-		function fetchingAndDecoding(url, type) {
+		function fetchingAndDecoding(url) {
 		  return fetch(url).then(response => {
 	 	    // accedemos al resultado de la peticion HTTP,en este caso a sus cabezeras de respuesta		  
 		    let hd_content_type = response.headers.get('Content-Type');// tipo de contenido - Content-Type
@@ -36,9 +36,9 @@
 		}
 		
 		// tres variables que tendran como valor el resultado de una promesa 		
-		let coffe = fetchingAndDecoding('taza.jpeg','blob');	// blob
-		let tea   = fetchingAndDecoding('tea.jpg','blob');	// blob
-		let txt   = fetchingAndDecoding('description.txt','text')// text
+		let coffe = fetchingAndDecoding('taza.jpeg');	// blob
+		let tea   = fetchingAndDecoding('tea.jpg');	// blob
+		let txt   = fetchingAndDecoding('description.txt')// text
 		
 		
 		Promise.all([coffe,tea,txt]).then(values =>{
