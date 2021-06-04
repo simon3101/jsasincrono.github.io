@@ -14,15 +14,16 @@
 		  return fetch(url).then(response => {
 	 	    // accedemos al resultado de la peticion HTTP,en este caso a sus cabezeras de respuesta		  
 		    let hd_content_type = response.headers.get('Content-Type');// tipo de contenido - Content-Type
-		    
+		    let hd_content_type2 = response.headers.get('date');
 		    // tipo de dato de la respuesta
 		    console.log('Type Response: ' + hd_content_type);
+		    console.log('Type Response: ' + hd_content_type2);
 		    if(!response.ok) {
 		      throw new Error(`HTTP error! status: ${response.status}`);
 		    } else {
-		      if(type === 'blob') {
+		      if(hd_content_type === 'image/jpeg') {
 			return response.blob();
-		      } else if(type === 'text') {
+		      } else if(hd_content_type === 'text/plain') {
 			return response.text();
 		      }
 		    }
@@ -30,7 +31,7 @@
 		  .catch(e => {
 		    console.log(`There has been a problem with your fetch operation for resource "${url}": ` + e.message);
 		  }).finally(()=>{
-		  	console.log(`fetch attempt for "${url}" finished`)
+		  	console.log(`!!! -----> fetch attempt for "${url}" FINISHED <------- !!!`)
 		  });
 		}
 		
@@ -41,9 +42,9 @@
 		
 		
 		Promise.all([coffe,tea,txt]).then(values =>{
-			console.log(values.headers);
+			console.log(values);
+			console.log(values[0])
 			values.forEach(value =>{
-				console.log(`Valor Individuar ${value}`)
 				if(typeof value === 'string'){
 					let paragraph = document.createElement('p');
 					let text = document.createTextNode(value);
