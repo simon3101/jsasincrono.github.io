@@ -23,7 +23,7 @@
 		    } else {
 		      if(hd_content_type === 'image/jpeg') {
 			return response.blob();
-		      } else if(hd_content_type === 'text/plain') {
+		      } else if(hd_content_type === 'text/plain; charset=utf-8') {
 			return response.text();
 		      }
 		    }
@@ -43,7 +43,6 @@
 		
 		Promise.all([coffe,tea,txt]).then(values =>{
 			console.log(values);
-			console.log(values[0])
 			values.forEach(value =>{
 				if(typeof value === 'string'){
 					let paragraph = document.createElement('p');
