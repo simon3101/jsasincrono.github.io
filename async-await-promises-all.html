@@ -4,10 +4,65 @@
 	<title> :v </title>
 </head>
 <body>
-<div>
-	<script type="text/javascript">
+	<script>
+		let toType = function(obj) {
+			// funcion que verifica el tipo de dato de un objeto en concreto
+			   return ({}).toString.call(obj).match(/\s([a-z|A-Z]+)/)[1].toLowerCase()
+		}
 		
-	</script>
+		async function fetchingAndDecoding(url) {
+			let response = await fetch(url);
+			let content;
+			// accedemos al resultado de la peticion HTTP,en este caso a sus cabezeras de respuesta		  
+		    	let hd_content_type = response.headers.get('Content-Type');//
+			if(!response.ok) {
+		     	 	throw new Error(`HTTP error! status: ${response.status}`);
+		    	}else{
+				if(hd_content_type === 'image/jpeg') {
+				content = response.blob();
+		      		} else if(hd_content_type === 'text/plain; charset=utf-8') {
+				content = response.text();
+		      		}
+				return content
+			}// Final de los primeros bloques if,else
+		   }
+// 		  .catch(e => {
+// 		    console.log(`There has been a problem with your fetch operation for resource "${url}": ` + e.message);
+// 		  }).finally(()=>{
+// 		  	console.log(`!!! -----> fetch attempt for "${url}" FINISHED <------- !!!`)
+// 		  });
+		
+		async function displayDates(){
+			// tres variables que tendran como valor el resultado de una promesa 		
+			let coffe = fetchingAndDecoding('taza.jpeg');	  // blob
+			let tea   = fetchingAndDecoding('tea.jpg');	  // blob
+			let txt   = fetchingAndDecoding('description.txt')// text
+		
+			let values = await Promise.all([coffe,tea,txt]); 
+			
+			values.forEach(value =>{
+				if(typeof value === 'string'){
+					let paragraph = document.createElement('p');
+					let text = document.createTextNode(value);
+					paragraph.appendChild(text);
+					// si no es un Objecto htmlDOM en el parametro del metodo appendChild dara error
+					document.body.appendChild(paragraph);
+				}
+				else if(value.type === 'image/jpeg'){
+					let objectURL = URL.createObjectURL(value);
+					let img = document.createElement('img');
+					img.src = objectURL;
+					document.body.appendChild(img);
+				}
+			})//Final del ForEach
+		}
+		
+			
+		displayDates..catch(e => {
+		    console.log(`There has been a problem with your fetch operation for resource "${}": ${e.message}` );
+		  }).finally(()=>{
+		  	console.log(`!!! -----> fetch attempt for "${url}" FINISHED <------- !!!`)
+		  });
 </div>
 </body>
 </html>
