@@ -59,9 +59,9 @@
 		
 			
 		displayDates().catch(e => {
-		    console.log(`There has been a problem with your fetch operation for resource "${}": ${e.message}` );
+		    console.log(`There has been a problem with your fetch operation for resource ${e.message}` );
 		  }).finally(()=>{
-		  	console.log(`!!! -----> fetch attempt for "${url}" FINISHED <------- !!!`)
+		  	console.log(`!!! -----> fetch attempt FINISHED <------- !!!`)
 		  });
 	</script>
 </body>
