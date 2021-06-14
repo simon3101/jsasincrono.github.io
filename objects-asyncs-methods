@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>Our superheroes</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">    
+    <link rel="stylesheet" href="css/jsons.css">
+  </head>
+
+  <body>
+
+      <header>
+      </header>
+
+      <section>
+
+      </section>
+
+    <script>
+    const header = document.querySelector('header');
+    const section = document.querySelector('section');
+    // Esta es la URL donde estan los datos json,y la guardamos en una variable 
+    const requestURL = 'https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json';
+
+    // request es la instancia de la solicitud a los datos Json
+    // XMLHttpRequest es un objeto para odtener datos de una URL
+    const request = new XMLHttpRequest()
+
+    //open() es un metodo del objeto XMLHttpRequest(solicitud)
+    // este metodos tiene varios parametros pero tiene 2 obligatorios,el primero es el METHOD a realizar la solicitud
+    // Puede ser 'Get' 'POST' 'DELETE' etc, todos estos metodos son HTTP
+    // el segundo parametro es 'URL' es la ruta de donde se encuentran los recursos, 'METHOD' indicara que se va a realizar con los recursos obtenidos de la URL
+    // open(METHOD,URL,Async,user,password)
+    request.open('GET',requestURL)
+
+    //a la propiedad responseType le Indicamos que el tipo de respuesta que tiene que recibir es un objeto String aunque por defecto es un String
+    request.responseType = 'text'
+
+    // Enviamos la solicitud al servidor
+    request.send()
+
+    // Cuando este cargado 100% la solicitud esta activara una funcion
+    request.onload = function(){
+      // Sabemos que al enviar la solicitud obtenemos una respuesta
+      // Esa respuesta(response) es un Objeto Json en este caso,un json es lo que se almacena en la variable superHeroes
+      // Aqui Obtendremos una cadena de texto 
+      console.log(request.response)
+      // pero antes como indicamos que la respuesta seria una cadena de texto entonces convertimos esa cadena en un Objeto Json
+      const superHeroesText = request.response;
+      const superHeroes     = JSON.parse(superHeroesText)
+      console.log(superHeroes)
+      // A continuacion el objeto superHeroes lo usamos para
+      
+        // Llenar el header con los datos correctos
+        populateHeader(superHeroes);
+      
+        // Mostrar a los Heroes
+        showHeroes(superHeroes);
+    }
+
+    function populateHeader(jsonObj) {
+      const h1 = document.createElement('h1')
+      h1.textContent = jsonObj['squadName']
+      header.appendChild(h1)
+
+      const myPara = document.createElement('p');
+        myPara.textContent = 'Hometown: ' + jsonObj['homeTown'] + ' // Formed: ' + jsonObj['formed'];
+      header.appendChild(myPara);
+      }
+
+    function showHeroes(jsonObj) {
+      const heroes = jsonObj['members'];
+
+      for (var i = 0; i < heroes.length; i++) {
+          const myArticle = document.createElement('article');
+          const myH2 = document.createElement('h2');
+          const myPara1 = document.createElement('p');
+          const myPara2 = document.createElement('p');
+          const myPara3 = document.createElement('p');
+          const myList = document.createElement('ul');
+
+          myH2.textContent = heroes[i].name;
+          myPara1.textContent = 'Secret identity: ' + heroes[i].secretIdentity;
+          myPara2.textContent = 'Age: ' + heroes[i].age;
+          myPara3.textContent = 'Superpowers:';
+
+          const superPowers = heroes[i].powers;
+          for (var j = 0; j < superPowers.length; j++) {
+            const listItem = document.createElement('li');
+            listItem.textContent = superPowers[j];
+            myList.appendChild(listItem);
+          }
+
+          myArticle.appendChild(myH2);
+          myArticle.appendChild(myPara1);
+          myArticle.appendChild(myPara2);
+          myArticle.appendChild(myPara3);
+          myArticle.appendChild(myList);
+
+          section.appendChild(myArticle);
+      }
+    }
+
+
+    </script>
+  </body>
+</html>
